@@ -1,4 +1,15 @@
 <?php include("cabecera.php"); ?>
+<?php include("conexion.php"); ?>
+
+<?php
+
+$objConexion=new conexion();
+
+$sql="INSERT INTO `proyectos` (`id`, `nombre`, `imagen`, `descripcion`) VALUES (NULL, 'Proyecto 1', 'imagen.jpg', 'Proyecto de hace mucho timepo.....');";
+
+$objConexion->ejecutar($sql);
+
+?>
 
 <br/>
 
