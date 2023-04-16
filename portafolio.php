@@ -13,6 +13,15 @@ if($_POST){
     $descripcion=$_POST['descripcion'];
     $imagen=$_FILES['archivo']['name'];
 
+    // se llama a fecha para agregar al archivo que se guardara
+    $fecha=new DateTime();
+    //esta variable contendra el nombre del archivo original + la fecha en milisegundos
+    $imagen=$fecha->getTimestamp()."_".$_FILES['archivo']['name'];
+    // se almacena en variable temporal la imágen que se guardara en carpeta local
+    $imagen_temporal=$_FILES['archivo']['tmp_name'];
+    // se guarda en carpeta definida previamente el archivo que se sube a base de datos
+    move_uploaded_file($imagen_temporal,"tifs/".$imagen);
+
     $objConexion=new conexion();
     $sql="INSERT INTO `proyectos` (`id`, `nombre`, `imagen`, `descripcion`) VALUES (NULL, '$nombre', '$imagen', '$descripcion');";
     $objConexion->ejecutar($sql);
