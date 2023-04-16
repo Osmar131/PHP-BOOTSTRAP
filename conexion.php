@@ -15,10 +15,14 @@ class conexion{
             return  "falla de conexión".$e;
         }
     }
-
     public function ejecutar($sql){
         $this->conexion->exec($sql);
         return $this->conexion->lastInsertId();
+    }
+    public function consultar($sql){
+        $sentencia=$this->conexion->prepare($sql);
+        $sentencia->execute();
+        return $sentencia->fetchAll();
     }
 }
 

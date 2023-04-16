@@ -10,13 +10,17 @@ if($_POST){
 
     // se recibe el nombre de archivo y se guarda en variable nombre para su guardado en base MYSQL
     $nombre=$_POST['nombre']; // se sustituye en la variable imagen en la instrucción donde se agrega a MYSQL...
-
     $objConexion=new conexion();
-
     $sql="INSERT INTO `proyectos` (`id`, `nombre`, `imagen`, `descripcion`) VALUES (NULL, '$nombre', 'imagen.jpg', 'Proyecto de hace mucho timepo.....');";
-
     $objConexion->ejecutar($sql);
+
+    // esta parte consulta los datos almacenados en MYSQL
+    $objConexion=new conexion();
+    $resultado=$objConexion->consultar("SELECT * FROM `proyectos`");
+
+    print_r($resultado);
 }
+
 ?>
 
 <br/>
