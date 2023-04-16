@@ -16,9 +16,9 @@ if($_POST){
 
     // esta parte consulta los datos almacenados en MYSQL
     $objConexion=new conexion();
-    $resultado=$objConexion->consultar("SELECT * FROM `proyectos`");
+    $proyectos=$objConexion->consultar("SELECT * FROM `proyectos`");
 
-    print_r($resultado);
+    // print_r($proyectos);
 }
 
 ?>
@@ -56,22 +56,23 @@ if($_POST){
                 <table class="table table-primary">
                     <thead>
                         <tr>
-                            <th scope="col">ID</th>
-                            <th scope="col">Nombre</th>
-                            <th scope="col">Imagen</th>
+                            <td>ID</td>
+                            <td>Nombre</td>
+                            <td>Imagen</td>
+                            <td>Descripción</td>
+                            <td>Acciones</td>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="">
-                            <td scope="row">3</td>
-                            <td>Aplicación web</td>
-                            <td>Imagen.jpg</td>
+                        <?php foreach($proyectos as $proyecto){ ?>
+                        <tr>
+                            <td><?php echo $proyecto['id'] ?></td>
+                            <td><?php echo $proyecto['nombre'] ?></td>
+                            <td><?php echo $proyecto['imagen'] ?></td>
+                            <td><?php echo $proyecto['descripcion'] ?></td>
+                            <td><a class="btn btn-danger" href="#" >Eliminar</a></td>
                         </tr>
-                        <tr class="">
-                            <td scope="row">Item</td>
-                            <td>Item</td>
-                            <td>Item</td>
-                        </tr>
+                        <?php } ?>
                     </tbody>
                 </table>
             </div>
