@@ -14,12 +14,22 @@ if($_POST){
     $sql="INSERT INTO `proyectos` (`id`, `nombre`, `imagen`, `descripcion`) VALUES (NULL, '$nombre', 'imagen.jpg', 'Proyecto de hace mucho timepo.....');";
     $objConexion->ejecutar($sql);
 
-    // esta parte consulta los datos almacenados en MYSQL
-    $objConexion=new conexion();
-    $proyectos=$objConexion->consultar("SELECT * FROM `proyectos`");
-
-    // print_r($proyectos);
 }
+
+if($_GET){
+    // DELETE FROM proyectos WHERE `proyectos`.`id` = 3"
+    $id=$_GET['borrar'];
+    $objConexion=new conexion();
+    $sql="DELETE FROM proyectos WHERE `proyectos`.`id` =".$id;
+    $objConexion->ejecutar($sql);
+}
+
+// esta parte consulta los datos almacenados en MYSQL
+$objConexion=new conexion();
+$proyectos=$objConexion->consultar("SELECT * FROM `proyectos`");
+
+// print_r($proyectos);
+
 
 ?>
 
@@ -70,7 +80,7 @@ if($_POST){
                             <td><?php echo $proyecto['nombre'] ?></td>
                             <td><?php echo $proyecto['imagen'] ?></td>
                             <td><?php echo $proyecto['descripcion'] ?></td>
-                            <td><a class="btn btn-danger" href="#" >Eliminar</a></td>
+                            <td><a class="btn btn-danger" href="?borrar=<?php echo $proyecto['id'] ?>" >Eliminar</a></td>
                         </tr>
                         <?php } ?>
                     </tbody>

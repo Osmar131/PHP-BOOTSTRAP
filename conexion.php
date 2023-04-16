@@ -15,7 +15,7 @@ class conexion{
             return  "falla de conexión".$e;
         }
     }
-    public function ejecutar($sql){
+    public function ejecutar($sql){ // esta función es para Insertar/ Deletear/ y Actualizar
         $this->conexion->exec($sql);
         return $this->conexion->lastInsertId();
     }
