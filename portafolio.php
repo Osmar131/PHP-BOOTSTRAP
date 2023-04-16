@@ -25,6 +25,8 @@ if($_POST){
     $objConexion=new conexion();
     $sql="INSERT INTO `proyectos` (`id`, `nombre`, `imagen`, `descripcion`) VALUES (NULL, '$nombre', '$imagen', '$descripcion');";
     $objConexion->ejecutar($sql);
+    header("location:portafolio.php");
+
 
 }
 // sección de eliminación de imagen y registro proporcionados en plataforma
@@ -38,6 +40,7 @@ if($_GET){
 
     $sql="DELETE FROM proyectos WHERE `proyectos`.`id` =".$id;
     $objConexion->ejecutar($sql);
+    header("location:portafolio.php");
 }
 
 // esta parte consulta los datos almacenados en MYSQL
@@ -63,11 +66,11 @@ $proyectos=$objConexion->consultar("SELECT * FROM `proyectos`");
                 <div class="card-body">
 
                     <form action="portafolio.php" method="post" enctype="multipart/form-data" >
-                        Nombre del proyecto: <input class="form-control" type="text" name="nombre" id="">
+                        Nombre del proyecto: <input required class="form-control" type="text" name="nombre" id="">
                         <br/>
-                        Imagen del proyecto: <input class="form-control" type="file" name="archivo" id="">
+                        Imagen del proyecto: <input required class="form-control" type="file" name="archivo" id="">
                         <br/>
-                        <textarea class="form-control" name="descripcion" id="" cols="30" rows="10"></textarea>
+                        <textarea required  class="form-control" name="descripcion" id="" cols="30" rows="10"></textarea>
                         <br/>  
                         <input class="btn btn-success" type="submit" value="Enviar proyecto">
 
