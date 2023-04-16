@@ -27,11 +27,15 @@ if($_POST){
     $objConexion->ejecutar($sql);
 
 }
-
+// sección de eliminación de imagen y registro proporcionados en plataforma
 if($_GET){
     // DELETE FROM proyectos WHERE `proyectos`.`id` = 3"
     $id=$_GET['borrar'];
     $objConexion=new conexion();
+
+    $imagen=$objConexion->consultar("SELECT imagen FROM `proyectos` WHERE id=".$id);
+    unlink("tifs/".$imagen[0]['imagen']);
+
     $sql="DELETE FROM proyectos WHERE `proyectos`.`id` =".$id;
     $objConexion->ejecutar($sql);
 }
@@ -92,7 +96,8 @@ $proyectos=$objConexion->consultar("SELECT * FROM `proyectos`");
                         <tr>
                             <td><?php echo $proyecto['id'] ?></td>
                             <td><?php echo $proyecto['nombre'] ?></td>
-                            <td><?php echo $proyecto['imagen'] ?></td>
+                            <td>
+                                <img width="100" src="tifs/<?php echo $proyecto['imagen'] ?>" alt=""></td>
                             <td><?php echo $proyecto['descripcion'] ?></td>
                             <td><a class="btn btn-danger" href="?borrar=<?php echo $proyecto['id'] ?>" >Eliminar</a></td>
                         </tr>
