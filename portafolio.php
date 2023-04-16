@@ -3,12 +3,20 @@
 
 <?php
 
-$objConexion=new conexion();
+if($_POST){
 
-$sql="INSERT INTO `proyectos` (`id`, `nombre`, `imagen`, `descripcion`) VALUES (NULL, 'Proyecto 1', 'imagen.jpg', 'Proyecto de hace mucho timepo.....');";
+    // esta instrución print_r es para imprimir en pantalla las variables, y no es necesario
+    // print_r($_POST);
 
-$objConexion->ejecutar($sql);
+    // se recibe el nombre de archivo y se guarda en variable nombre para su guardado en base MYSQL
+    $nombre=$_POST['nombre']; // se sustituye en la variable imagen en la instrucción donde se agrega a MYSQL...
 
+    $objConexion=new conexion();
+
+    $sql="INSERT INTO `proyectos` (`id`, `nombre`, `imagen`, `descripcion`) VALUES (NULL, '$nombre', 'imagen.jpg', 'Proyecto de hace mucho timepo.....');";
+
+    $objConexion->ejecutar($sql);
+}
 ?>
 
 <br/>
@@ -24,7 +32,7 @@ $objConexion->ejecutar($sql);
                 </div>
                 <div class="card-body">
 
-                    <form action="portafolio.php" method="post">
+                    <form action="portafolio.php" method="post" enctype="multipart/form-data" >
                         Nombre del proyecto: <input class="form-control" type="text" name="nombre" id="">
                         <br/>
                         Imagen del proyecto: <input class="form-control" type="file" name="archivo" id="">
