@@ -10,8 +10,11 @@ if($_POST){
 
     // se recibe el nombre de archivo y se guarda en variable nombre para su guardado en base MYSQL
     $nombre=$_POST['nombre']; // se sustituye en la variable imagen en la instrucción donde se agrega a MYSQL...
+    $descripcion=$_POST['descripcion'];
+    $imagen=$_FILES['archivo']['name'];
+
     $objConexion=new conexion();
-    $sql="INSERT INTO `proyectos` (`id`, `nombre`, `imagen`, `descripcion`) VALUES (NULL, '$nombre', 'imagen.jpg', 'Proyecto de hace mucho timepo.....');";
+    $sql="INSERT INTO `proyectos` (`id`, `nombre`, `imagen`, `descripcion`) VALUES (NULL, '$nombre', '$imagen', '$descripcion');";
     $objConexion->ejecutar($sql);
 
 }
@@ -50,6 +53,8 @@ $proyectos=$objConexion->consultar("SELECT * FROM `proyectos`");
                         Nombre del proyecto: <input class="form-control" type="text" name="nombre" id="">
                         <br/>
                         Imagen del proyecto: <input class="form-control" type="file" name="archivo" id="">
+                        <br/>
+                        <textarea class="form-control" name="descripcion" id="" cols="30" rows="10"></textarea>
                         <br/>  
                         <input class="btn btn-success" type="submit" value="Enviar proyecto">
 
